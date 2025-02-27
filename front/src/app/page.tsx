@@ -1,9 +1,9 @@
+// app/page.tsx
+import DatePage from './Date';
 
+const Page = () => { //導向到Date.tsx
+  return <DatePage />;
+};
 
-export default function HomePage() {
-  return (
-    <div>
-      <h1>行事曆</h1>     
-    </div>
-  );
-}
+export default Page;
+
