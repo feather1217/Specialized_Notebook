@@ -34,27 +34,27 @@ export default function Menu() {
             </SheetHeader>
           </div>
           <nav className="grid m-5 gap-5">
-            <Link href="/" onClick={() => setIsOpen(false)} className=" flex hover:text-[#A0D9D4] space-x-2 items-center">
+            <Link href="/" onClick={() => setIsOpen(false)} className=" flex hover:text-[#548985] space-x-2 items-center">
               <CalendarDots size={32} weight="thin" />
               <span className="text-xl font-medium">行事曆</span>
             </Link>
-            <Link href="/notes" onClick={() => setIsOpen(false)} className=" flex hover:text-[#A0D9D4] space-x-2 items-center">
+            <Link href="/notes" onClick={() => setIsOpen(false)} className=" flex hover:text-[#548985] space-x-2 items-center">
             <Notebook size={32} weight="thin" />
               <span className="text-xl font-medium">記事本</span>
             </Link>
-            <Link href="/timeline" onClick={() => setIsOpen(false)} className="flex hover:text-[#A0D9D4] space-x-2 items-center">
+            <Link href="/timeline" onClick={() => setIsOpen(false)} className="flex hover:text-[#548985] space-x-2 items-center">
             <FadersHorizontal size={32} weight="thin" />
               <span className="text-xl font-medium">甘特圖</span>
             </Link>
-            <Link href="/group" onClick={() => setIsOpen(false)} className="flex hover:text-[#A0D9D4] space-x-2 items-center">
+            <Link href="/group" onClick={() => setIsOpen(false)} className="flex hover:text-[#548985] space-x-2 items-center">
             <UsersThree size={32} weight="thin" />
               <span className="text-xl font-medium">群組</span>
             </Link>
-            <Link href="/set" onClick={() => setIsOpen(false)} className="flex hover:text-[#A0D9D4] space-x-2 items-center">
+            <Link href="/set" onClick={() => setIsOpen(false)} className="flex hover:text-[#548985] space-x-2 items-center">
             <Gear size={32} weight="thin" />
               <span className="text-xl font-medium">設定</span>
             </Link>
-            <Link href="/QA" onClick={() => setIsOpen(false)} className="flex hover:text-[#A0D9D4] space-x-2 items-center">
+            <Link href="/QA" onClick={() => setIsOpen(false)} className="flex hover:text-[#548985] space-x-2 items-center">
             <QuestionMark size={32} weight="thin" />
               <span className="text-xl font-medium">Q&A</span>
             </Link>
