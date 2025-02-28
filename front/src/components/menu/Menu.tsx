@@ -6,6 +6,8 @@ import { List, CalendarDots, Notebook, FadersHorizontal, Gear, UsersThree, Quest
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+const isLoggedIn = false; 
+
 // Menu 組件
 export default function Menu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +32,12 @@ export default function Menu() {
               <AvatarFallback>載入失敗</AvatarFallback>
             </Avatar>
             <SheetHeader className="text-2xl font-bold">
-              <SheetTitle>羽毛</SheetTitle>
+              {/* 根據登入狀態顯示不同的內容 */}
+              {isLoggedIn ? (
+                  <span>username</span>  // 用戶名可以從狀態或上下文中取得
+                ) : (
+                  <Link onClick={() => setIsOpen(false)} href="/signin">未登入</Link> // 點擊後進入登入頁面
+                )}
             </SheetHeader>
           </div>
           <nav className="grid m-5 gap-5">
@@ -58,6 +65,7 @@ export default function Menu() {
             <QuestionMark size={32} weight="thin" />
               <span className="text-xl font-medium">Q&A</span>
             </Link>
+
           </nav>
         </SheetContent>
 
