@@ -31,7 +31,7 @@ const AddGroupForm = ({ onJoinGroup, onCancel, userName }: AddGroupFormProps) =>
       <label className="text-gray-600">群組ID</label>
       <input
         type="text"
-        value={groupId}
+        value=""
         onChange={(e) => setGroupId(Number(e.target.value))}
         placeholder="輸入群組 ID"
         className="border p-2 w-full rounded-md mt-2"

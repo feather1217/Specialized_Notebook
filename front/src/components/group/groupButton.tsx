@@ -11,117 +11,113 @@ import CreateGroupForm from "../../components/from/creategroup_from"; // 引入�
 import { useAuthStore } from "@/store/authStore"; // 引入 Zustand 狀態管理
 
 export default function GroupFloatingButton() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isCreatingGroup, setIsCreatingGroup] = useState(false);
-  const [isJoiningGroup, setIsJoiningGroup] = useState(false); // 新增狀態來控制加入群組的顯示
+    const [isOpen, setIsOpen] = useState(false);
+    const [isCreatingGroup, setIsCreatingGroup] = useState(false);
+    const [isJoiningGroup, setIsJoiningGroup] = useState(false); // 新增狀態來控制加入群組的顯示
 
-  const user = useAuthStore((state) => state.user);
+    const user = useAuthStore((state) => state.user);
 
-  const handleCreateGroup = async (groupName: string) => {
-    try {
-      if (user) {
-        const newGroup = await createGroup(groupName, user.name); // 使用API來創建群組
-        console.log(`創建群組成功: ${newGroup.group_name}`);
-        setIsOpen(false); // 創建成功後關閉對話框
-        setIsCreatingGroup(false); // 隱藏創建群組表單
-      } else {
-        console.error("用戶未登錄");
-      }
-    } catch (error) {
-      console.error("創建群組失敗", error);
-    }
-  };
-
-  const handleJoinGroup = async (groupId: number, userName: string) => {
-    try {
-      const updatedGroup = await joinGroup(groupId, userName); // 使用API來加入群組
-      if (updatedGroup) {
-        console.log(`加入群組成功: ${updatedGroup.group_name}`);
-      } else {
-        console.error("群組未找到");
-      }
-      setIsOpen(false); // 加入成功後關閉對話框
-      setIsJoiningGroup(false); // 隱藏加入群組表單
-    } catch (error) {
-      console.error("加入群組失敗", error);
-    }
-  };
-
-  return (
-    <div className="fixed bottom-6 right-6 flex flex-col items-end space-y-2">
-      <AnimatePresence>
-        {isOpen && (
-          <div className="space-y-2">
-            <motion.button
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.2 }}
-              className="p-3 rounded-full shadow-md flex items-center"
-              onClick={() => {
-                setIsJoiningGroup(true); // 顯示加入群組表單
+    const handleCreateGroup = async (groupName: string) => {
+        try {
+            if (user) {
+                const newGroup = await createGroup(groupName, user.name); // 使用API來創建群組
+                console.log(`創建群組成功: ${newGroup.group_name}`);
+                setIsOpen(false); // 創建成功後關閉對話框
                 setIsCreatingGroup(false); // 隱藏創建群組表單
-              }}
+            } else {
+                console.error("用戶未登錄");
+            }
+        } catch (error) {
+            console.error("創建群組失敗", error);
+        }
+    };
+
+    const handleJoinGroup = async (groupId: number, userName: string) => {
+        try {
+            const updatedGroup = await joinGroup(groupId, userName); // 使用API來加入群組
+            if (updatedGroup) {
+                console.log(`加入群組成功: ${updatedGroup.group_name}`);
+            } else {
+                console.error("群組未找到");
+            }
+            setIsOpen(false); // 加入成功後關閉對話框
+            setIsJoiningGroup(false); // 隱藏加入群組表單
+        } catch (error) {
+            console.error("加入群組失敗", error);
+        }
+    };
+
+    return (
+        <div className="fixed bottom-6 right-6 flex flex-col items-end space-y-2">
+            <AnimatePresence>
+                {isOpen && (
+                    <div className="space-y-2">
+                        <motion.button
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.2 }}
+                            className="p-3 rounded-full shadow-md flex items-center"
+                            onClick={() => {
+                                setIsJoiningGroup(true); // 顯示加入群組表單
+                                setIsCreatingGroup(false); // 隱藏創建群組表單
+                            }}
+                        >
+                            <UserCirclePlus size={32} />
+                        </motion.button>
+
+                        <motion.button
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.2, delay: 0.1 }}
+                            className="p-3 rounded-full shadow-md flex items-center"
+                            onClick={() => {
+                                setIsCreatingGroup(true); // 顯示創建群組表單
+                                setIsJoiningGroup(false); // 隱藏加入群組表單
+                            }}
+                        >
+                            <FolderSimplePlus size={32} />
+                        </motion.button>
+                    </div>
+                )}
+            </AnimatePresence>
+
+            <Button
+                className="rounded-full mt-5 w-12 h-12 p-4 bg-primary shadow-lg flex items-center justify-center"
+                onClick={() => setIsOpen(!isOpen)} // 切換顯示
             >
-              <UserCirclePlus size={32} />
-            </motion.button>
+                <Plus size={32} weight="bold" />
+            </Button>
 
-            <motion.button
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.2, delay: 0.1 }}
-              className="p-3 rounded-full shadow-md flex items-center"
-              onClick={() => {
-                setIsCreatingGroup(true); // 顯示創建群組表單
-                setIsJoiningGroup(false); // 隱藏加入群組表單
-              }}
-            >
-              <FolderSimplePlus size={32} />
-            </motion.button>
-          </div>
-        )}
-      </AnimatePresence>
+            {(isCreatingGroup || isJoiningGroup) && (
+                <div className="fixed inset-0 flex justify-center items-center z-50">
+                    <div
+                        className="absolute inset-0 bg-neutral-700 bg-opacity-50"
+                        onClick={() => {
+                            isCreatingGroup ? setIsCreatingGroup(false) : setIsJoiningGroup(false);
+                        }}
+                    />
+                    <Card className="p-6 w-1/3 z-10">
+                        <h2 className="text-xl font-bold text-center">
+                            {isCreatingGroup ? "創建群組" : "加入群組"}
+                        </h2>
+                        {isCreatingGroup ? (
+                            <CreateGroupForm
+                                onCreateGroup={handleCreateGroup}
+                                onCancel={() => setIsCreatingGroup(false)}
+                            />
+                        ) : (
+                            <AddGroupForm
+                                onJoinGroup={handleJoinGroup}
+                                onCancel={() => setIsJoiningGroup(false)}
+                                userName={user?.name || ""}
+                            />
+                        )}
+                    </Card>
+                </div>
+            )}
 
-      <Button
-        className="rounded-full mt-5 w-12 h-12 p-4 bg-primary shadow-lg flex items-center justify-center"
-        onClick={() => setIsOpen(!isOpen)} // 切換顯示
-      >
-        <Plus size={32} weight="bold" />
-      </Button>
-
-      {isCreatingGroup && (
-        <div className="fixed inset-0 flex justify-center items-center z-50">
-          <div
-            className="absolute inset-0 bg-neutral-700 bg-opacity-50"
-            onClick={() => setIsCreatingGroup(false)} // 點擊背景關閉
-          />
-          <Card className="p-6 w-1/3 z-10">
-            <h2 className="text-xl font-bold text-center">創建群組</h2>
-            <CreateGroupForm
-              onCreateGroup={handleCreateGroup}
-              onCancel={() => setIsCreatingGroup(false)} // 取消時關閉表單
-            />
-          </Card>
         </div>
-      )}
-
-      {isJoiningGroup && (
-        <div className="fixed inset-0 flex justify-center items-center z-50">
-          <div
-            className="absolute inset-0 bg-neutral-700 bg-opacity-50"
-            onClick={() => setIsJoiningGroup(false)} // 點擊背景關閉
-          />
-          <Card className="p-6 w-1/3 z-10">
-            <h2 className="text-xl font-bold text-center">加入群組</h2>
-            <AddGroupForm
-              onJoinGroup={handleJoinGroup}
-              onCancel={() => setIsJoiningGroup(false)} // 取消時關閉表單
-              userName={user?.name || ""} // 傳遞用戶名稱
-            />
-          </Card>
-        </div>
-      )}
-    </div>
-  );
+    );
 }
