@@ -39,7 +39,7 @@ export default function GroupsPage() {
   return (
     <div className="">
       <h1 className="text-2xl font-bold ">群組</h1>
-      <div className="mt-5">
+      <div className="mt-5 ">
         <GroupCard
           groups={groups} // 傳遞群組資料
           userName={userName} // 傳遞當前用戶名稱

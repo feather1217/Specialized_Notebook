@@ -7,6 +7,7 @@ export default class User{
     phone: string;
     birthday: string;
     female: number;
+    avater: string;
 
 
     constructor(
@@ -18,6 +19,7 @@ export default class User{
         phone: string,
         birthday: string,
         female: number =0 ,
+        avater: string
     ){
         this.ID = ID;
         this.name = name;
@@ -27,5 +29,6 @@ export default class User{
         this.phone = phone;
         this.birthday = birthday;
         this.female = female;
+        this.avater = avater;
     }
 }

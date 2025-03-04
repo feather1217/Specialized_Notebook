@@ -11,6 +11,7 @@ const users: User[] = [
         birthday: "2000-12-17",
         female: 0,
         email: "mao@example.com",
+        avater: "", 
     },
 ];
 

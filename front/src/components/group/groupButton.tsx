@@ -10,7 +10,7 @@ import AddGroupForm from "@/components/from/addgroup_from"; // 引入加入群�
 import CreateGroupForm from "../../components/from/creategroup_from"; // 引入創建群組表單
 import { useAuthStore } from "@/store/authStore"; // 引入 Zustand 狀態管理
 
-export default function GroupFloatingButton() {
+export default function GroupButton() {
     const [isOpen, setIsOpen] = useState(false);
     const [isCreatingGroup, setIsCreatingGroup] = useState(false);
     const [isJoiningGroup, setIsJoiningGroup] = useState(false); // 新增狀態來控制加入群組的顯示
@@ -34,7 +34,8 @@ export default function GroupFloatingButton() {
 
     const handleJoinGroup = async (groupId: number, userName: string) => {
         try {
-            const updatedGroup = await joinGroup(groupId, userName); // 使用API來加入群組
+            const avatar = user?.avater || "/default-avatar.png"; // 確保 avatar 存在
+            const updatedGroup = await joinGroup(groupId, userName, avatar); // ✅ 傳遞 avatar
             if (updatedGroup) {
                 console.log(`加入群組成功: ${updatedGroup.group_name}`);
             } else {
@@ -46,6 +47,7 @@ export default function GroupFloatingButton() {
             console.error("加入群組失敗", error);
         }
     };
+    
 
     return (
         <div className="fixed bottom-6 right-6 flex flex-col items-end space-y-2">
@@ -93,7 +95,8 @@ export default function GroupFloatingButton() {
             {(isCreatingGroup || isJoiningGroup) && (
                 <div className="fixed inset-0 flex justify-center items-center z-50">
                     <div
-                        className="absolute inset-0 bg-neutral-700 bg-opacity-50"
+                        style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
+                        className="absolute inset-0"
                         onClick={() => {
                             isCreatingGroup ? setIsCreatingGroup(false) : setIsJoiningGroup(false);
                         }}
