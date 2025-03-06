@@ -25,14 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full overflow-hidden`}
       >
         <div className="fixed top-0 left-0 z-50"> {/* 導航欄 */}
           <Menu />
         </div>
-        <main className="ml-16 mt-5">
+        <main className="ml-16 mt-5 flex flex-col h-screen overflow-auto">
           {children}
         </main>
         <Toaster />

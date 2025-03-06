@@ -22,6 +22,7 @@ const SignUpForm = () => {
     phone: "",
     birthday: "",
     female: 0,
+    avater: "", // Add the missing avater property
   });
 
   const [error, setError] = useState("");

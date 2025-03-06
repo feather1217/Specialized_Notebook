@@ -35,7 +35,7 @@ export default function GroupButton() {
     const handleJoinGroup = async (groupId: number, userName: string) => {
         try {
             const avatar = user?.avater || "/default-avatar.png"; // 確保 avatar 存在
-            const updatedGroup = await joinGroup(groupId, userName, avatar); // ✅ 傳遞 avatar
+            const updatedGroup = await joinGroup(groupId, userName, avatar); 
             if (updatedGroup) {
                 console.log(`加入群組成功: ${updatedGroup.group_name}`);
             } else {
