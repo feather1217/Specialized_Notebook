@@ -1,7 +1,7 @@
 // app/Date.tsx
 import React from 'react';
-import DateM from '../components/date/date_day';
-import DateD from '../components/date/date_month';
+import DateD from '../components/date/date_day';
+import DateM from '../components/date/date_month';
 
 const DatePage = () => {
   return (
