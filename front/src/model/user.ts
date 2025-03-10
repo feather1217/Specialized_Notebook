@@ -1,4 +1,4 @@
-export default class User{
+export default class User {
     ID: number;
     name: string;
     account: string;
@@ -18,9 +18,9 @@ export default class User{
         email: string,
         phone: string,
         birthday: string,
-        female: number =0 ,
+        female: number = 0,
         avater: string
-    ){
+    ) {
         this.ID = ID;
         this.name = name;
         this.account = account;
