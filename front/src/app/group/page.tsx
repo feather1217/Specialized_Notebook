@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { fetchGroups } from "@/api/api/group"; // 引入 fetchGroups API
 import GroupCard from "@/components/groupcard/page"; // 引入 GroupCard 組件
-import GroupFloatingButton from "@/components/group/groupButton";
+import GroupFloatingButton from "@/components/button/groupButton";
 import { useAuthStore } from "@/store/authStore"; // 引入 Zustand 狀態管理
 
 export default function GroupsPage() {
