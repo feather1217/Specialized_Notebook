@@ -1,35 +1,34 @@
 "use client";
 // pages/groups.tsx
 import { useEffect, useState } from "react";
-import { fetchGroups } from "@/api/api/group"; // 引入 fetchGroups API
-import GroupCard from "@/components/groupcard/page"; // 引入 GroupCard 組件
+import { fetchGroups } from "@/api/api/group";
+import GroupCard from "@/components/groupcard/page";
 import GroupFloatingButton from "@/components/button/groupButton";
-import { useAuthStore } from "@/store/authStore"; // 引入 Zustand 狀態管理
+import { useAuthStore } from "@/store/authStore";
 
 export default function GroupsPage() {
-  const [groups, setGroups] = useState<any[]>([]); // 定義群組狀態
-  const [loading, setLoading] = useState(true); // 設置加載狀態
+  const [groups, setGroups] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const user = useAuthStore((state) => state.user);
   const userName = typeof user === "string" ? user : user?.name || "";
-  // 在組件加載時從 API 取得群組資料
+
   useEffect(() => {
     const loadGroups = async () => {
       try {
-        const groupsData = await fetchGroups(); // 呼叫 fetchGroups API
-        setGroups(groupsData); // 更新群組狀態
+        const groupsData = await fetchGroups();
+        setGroups(groupsData);
       } catch (error) {
         console.error("無法獲取群組資料", error);
       } finally {
-        setLoading(false); // 結束加載狀態
+        setLoading(false);
       }
     };
 
-    loadGroups(); // 執行資料加載
-  }, []); // 只在初次渲染時執行
+    loadGroups();
+  }, []);
 
-  // 更新群組的回調函數
   const handleGroupUpdated = (updatedGroups: any[]) => {
-    setGroups(updatedGroups); // 更新群組資料
+    setGroups(updatedGroups);
   };
 
   if (loading) {
@@ -37,17 +36,16 @@ export default function GroupsPage() {
   }
 
   return (
-    <div className="">
-      <h1 className="text-2xl font-bold ">群組</h1>
-      <div className="mt-5 ">
+    <div className="pl-4"> {/* 添加內邊距改善手機體驗 */}
+      <h1 className="text-2xl font-bold">群組</h1>
+      <div className="mt-5 flex flex-wrap gap-4"> {/* 使用 flex-wrap 和 gap 控制卡片間距 */}
         <GroupCard
-          groups={groups} // 傳遞群組資料
-          userName={userName} // 傳遞當前用戶名稱
-          onGroupUpdated={handleGroupUpdated} // 傳遞更新群組的回調函數
+          groups={groups}
+          userName={userName}
+          onGroupUpdated={handleGroupUpdated}
         />
       </div>
       <GroupFloatingButton />
     </div>
   );
 }
-

@@ -27,7 +27,7 @@ const CreateGroupForm = ({ onCreateGroup, onCancel }: CreateGroupFormProps) => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 p-6">
       <label className="  text-gray-600 ">名稱</label>
       <input
         type="text"

@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full overflow-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable}  antialiased h-full overflow-hidden`}
       >
         <div className="fixed top-0 left-0 z-50"> {/* 導航欄 */}
           <Menu />
